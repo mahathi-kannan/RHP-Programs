@@ -1,0 +1,33 @@
+1. Left shift - bitwise operator :
+printing whether all the lower and upper case a-z and A-Z are present or not :
+
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String str = sc.next();
+        
+        int lFlag = 0;
+        int uFlag = 0;         
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+            
+            if (ch >= 'a' && ch <= 'z') {
+                lFlag = lFlag | (1 << (ch - 'a'));
+            } 
+            else if (ch >= 'A' && ch <= 'Z') {
+                uFlag = uFlag | (1 << (ch - 'A'));
+            }
+        }
+        
+        if (lFlag == (1 << 26) - 1 && uFlag == (1 << 26) - 1) {
+            System.out.println("yes");
+        } else {
+            System.out.println("no");
+        }
+        
+        sc.close();
+    }
+}
