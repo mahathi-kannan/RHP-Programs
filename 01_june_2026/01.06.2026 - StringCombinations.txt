@@ -1,0 +1,32 @@
+2. Combinations left shift and bitwise &:
+ generating combinations of a string:
+
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String str = sc.next();
+        int n = str.length();
+        
+        // Total combinations = 2^n
+        int L = 1 << n;
+        
+       // 0 to (2^n - 1)
+        for (int ctr = 0; ctr < L; ctr++) {
+            String combination = "";
+            
+            for (int sh = 0; sh < n; sh++) {
+                 if ((ctr & (1 << sh)) != 0) {
+                    combination = combination + str.charAt(sh);
+                }
+            }
+            
+            System.out.println(combination);
+        }
+        
+        sc.close();
+    }
+}
+
