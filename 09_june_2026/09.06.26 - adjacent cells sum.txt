@@ -1,0 +1,62 @@
+import java.util.Scanner;
+
+public class TotalAdjacentSum {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int R = sc.nextInt(); 
+        int C = sc.nextInt(); 
+        
+        int[][] matrix = new int[R][C];
+
+        for (int i = 0; i < R; i++) {
+            for (int j = 0; j < C; j++) {
+                matrix[i][j] = sc.nextInt();
+            }
+        }
+        
+        int targetRow = sc.nextInt();
+        int targetCol = sc.nextInt();
+        
+        long sum = 0;
+        
+            
+        // Up
+        if (targetRow - 1 >= 0) {
+            sum += matrix[targetRow - 1][targetCol];
+        }
+        // Down
+        if (targetRow + 1 < R) {
+            sum += matrix[targetRow + 1][targetCol];
+        }
+        // Left
+        if (targetCol - 1 >= 0) {
+            sum += matrix[targetRow][targetCol - 1];
+        }
+        // Right
+        if (targetCol + 1 < C) {
+            sum += matrix[targetRow][targetCol + 1];
+        }
+        
+               // Top-Left Diagonal
+        if (targetRow - 1 >= 0 && targetCol - 1 >= 0) {
+            sum += matrix[targetRow - 1][targetCol - 1];
+        }
+        // Top-Right Diagonal
+        if (targetRow - 1 >= 0 && targetCol + 1 < C) {
+            sum += matrix[targetRow - 1][targetCol + 1];
+        }
+        // Bottom-Left Diagonal
+        if (targetRow + 1 < R && targetCol - 1 >= 0) {
+            sum += matrix[targetRow + 1][targetCol - 1];
+        }
+        // Bottom-Right Diagonal
+        if (targetRow + 1 < R && targetCol + 1 < C) {
+            sum += matrix[targetRow + 1][targetCol + 1];
+        }
+         
+        System.out.println(sum);
+        
+        sc.close();
+    }
+}
