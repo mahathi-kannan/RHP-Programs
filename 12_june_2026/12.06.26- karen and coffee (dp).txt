@@ -1,0 +1,55 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt(); 
+        int k = sc.nextInt(); 
+        int q = sc.nextInt(); 
+        
+        
+        int MAX_TEMP = 200005;
+        
+        int[] diff = new int[MAX_TEMP];          
+        int[] prefixSum = new int[MAX_TEMP];    
+        int[] optimalTemp = new int[MAX_TEMP];   
+        
+        
+        for (int i = 0; i < n; i++) {
+            int l = sc.nextInt();
+            int r = sc.nextInt();
+            
+            diff[l] += 1;     
+            diff[r + 1] -= 1; 
+        }
+        
+        
+        int runningRecipes = 0;
+        for (int i = 1; i < MAX_TEMP; i++) {
+            runningRecipes += diff[i];
+            prefixSum[i] = runningRecipes;
+        }
+        
+        
+        for (int i = 1; i < MAX_TEMP; i++) {
+            int isOptimal = 0;
+            if (prefixSum[i] >= k) {
+                isOptimal = 1; 
+            }
+            optimalTemp[i] = optimalTemp[i - 1] + isOptimal;
+        }
+        
+        
+        for (int i = 0; i < q; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            
+            
+            int answer = optimalTemp[b] - optimalTemp[a - 1];
+            System.out.println(answer);
+        }
+        
+        sc.close();
+    }
+}
